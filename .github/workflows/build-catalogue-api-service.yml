@@ -32,7 +32,6 @@ jobs:
       - name: Setup docker context for buildx
         id: buildx-context
         run: docker context create builders || docker context use builders
-
       - name: Create BuildKit Configuration
         run: |
           cat <<EOF > buildkitd.toml   
