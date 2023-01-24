@@ -1,0 +1,82 @@
+name: Build webportal image
+
+on: workflow_dispatch
+
+# DONT FORGET TO SET THE FOLLOWING GITHUB SECRETS (not necessary if the worflow is already working)
+# EMAIL_GITHUB
+# CADS_PAT -> github personal access token with repo and packages permissions
+# USERNAME_GITHUB
+env:
+  HARBOR_URL: 136.156.152.203
+  CADS_PORTAL: cds
+  CATALOGUE_API_PATH: /api/catalogue/v1
+  RETRIEVE_API_PATH: /api/retrieve/v1
+  INTERNAL_PROXY_URL: http://proxy
+  PROJECT_URL: http://cds2-test.copernicus-climate.eu
+  REACT_ENVIRONMENT: production
+
+jobs:
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Setup harbor ca certificate from secret
+        run: |
+          ls /etc/docker
+          sudo mkdir -p /etc/docker/certs.d/"${{ env.HARBOR_URL}}"
+          echo "${{ secrets.HARBOR_CERT }}" | base64 --decode | sudo tee /etc/docker/certs.d/"${{ env.HARBOR_URL}}"/ca.crt >/dev/null
+      - name: Copy ca cert
+        run: |
+          sudo cp /etc/docker/certs.d/"${{ env.HARBOR_URL}}"/ca.crt /etc/ssl/certs/ca-certificates.crt
+      - name: Login to harbor registry
+        uses: docker/login-action@v2
+        with:
+          registry: '${{ env.HARBOR_URL}}'
+          username: ${{ secrets.HARBOR_USER }}
+          password: ${{ secrets.HARBOR_TOKEN }}
+      - name: Setup docker context for buildx
+        id: buildx-context
+        run: docker context create builders || docker context use builders
+
+      - name: Create BuildKit Configuration
+        run: |
+          cat <<EOF > buildkitd.toml
+          [registry."${{ env.HARBOR_URL}}"]
+            http = false
+            insecure = false
+            ca=["/etc/ssl/certs/ca-certificates.crt"]
+          EOF
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          version: v0.9.1
+          endpoint: builders
+          buildkitd-flags: --debug
+          config: buildkitd.toml
+
+      - name: Checkout cads-webportal repo
+        uses: actions/checkout@v3
+        with:
+          repository: ecmwf-projects/cads-webportal
+          token: ${{ secrets.CADS_PAT }}
+          path: ./cads-webportal
+      - name: Build and push
+        uses: docker/build-push-action@v3
+
+        with:
+          context: ./cads-webportal
+          push: true
+          tags: ${{ env.HARBOR_URL}}/cads-dev-env/webportal:latest
+          file: ./cads-webportal/docker/remote.Dockerfile
+          build-args: |
+            CADS_PORTAL=${{ env.CADS_PORTAL}}
+            GITHUB_EMAIL=${{ secrets.EMAIL_GITHUB }}
+            GITHUB_TOKEN=${{ secrets.CADS_PAT }}
+            GITHUB_USERNAME=${{ secrets.USERNAME_GITHUB }}
+            INTERNAL_PROXY_URL=${{ env.INTERNAL_PROXY_URL}}
+            CATALOGUE_API_PATH:${{ env.CATALOGUE_API_PATH}}
+            PROJECT_URL=${{ env.PROJECT_URL}}
+            RETRIEVE_API_PATH: ${{ env.RETRIEVE_API_PATH}}
+            REACT_ENVIRONMENT=${{ env.REACT_ENVIRONMENT}}
