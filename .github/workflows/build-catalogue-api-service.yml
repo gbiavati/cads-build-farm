@@ -54,9 +54,9 @@ jobs:
       - name: Checkout cads-deployment repo
         uses: actions/checkout@v3 
         with:
-          repository: ecmwf-projects/cacholote
+          repository: ecmwf-projects/cads-deployment
           token: ${{ secrets.CADS_PAT }}
-          path: ./docker/cacholote      
+          path: .    
         
       - name: Checkout cacholote repo
         uses: actions/checkout@v3
