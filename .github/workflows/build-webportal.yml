@@ -7,7 +7,6 @@ on: workflow_dispatch
 # CADS_PAT -> github personal access token with repo and packages permissions
 # USERNAME_GITHUB
 env:
-  HARBOR_URL: 136.156.152.203
   CADS_PORTAL: cds
   CATALOGUE_API_PATH: /api/catalogue/v1
   RETRIEVE_API_PATH: /api/retrieve/v1
