@@ -1,4 +1,4 @@
-name: Build catalogue manager
+name: Build catalogue-manager image
 
 on:
   workflow_dispatch:
