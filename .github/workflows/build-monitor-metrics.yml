@@ -1,10 +1,12 @@
 name: Build monitor-metrics image
 
 on:
-  workflow_dispatch
-
-env:
-  HARBOR_URL: 136.156.152.203
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Image tag'
+        required: true
+        default: 'latest'
 
 jobs:
 
@@ -17,15 +19,15 @@ jobs:
       - name: Setup harbor ca certificate from secret
         run: |
           ls /etc/docker
-          sudo mkdir -p /etc/docker/certs.d/"${{ env.HARBOR_URL}}" 
-          echo "${{ secrets.HARBOR_CERT }}" | sudo tee /etc/docker/certs.d/"${{ env.HARBOR_URL}}"/ca.crt >/dev/null 
+          sudo mkdir -p /etc/docker/certs.d/"${{ secrets.HARBOR_IP }}" 
+          echo "${{ secrets.HARBOR_CERT }}" | sudo tee /etc/docker/certs.d/"${{ secrets.HARBOR_IP }}"/ca.crt >/dev/null 
       - name: Copy ca cert
         run: |
-          sudo cp /etc/docker/certs.d/"${{ env.HARBOR_URL}}"/ca.crt /etc/ssl/certs/ca-certificates.crt          
+          sudo cp /etc/docker/certs.d/"${{ secrets.HARBOR_IP }}"/ca.crt /etc/ssl/certs/ca-certificates.crt          
       - name: Login to harbor registry 
         uses: docker/login-action@v2
         with:
-          registry: "${{ env.HARBOR_URL}}" 
+          registry: "${{ secrets.HARBOR_IP }}" 
           username: ${{ secrets.HARBOR_USER }}
           password: ${{ secrets.HARBOR_TOKEN }}    
       - name: Setup docker context for buildx
@@ -35,7 +37,7 @@ jobs:
       - name: Create BuildKit Configuration
         run: |
           cat <<EOF > buildkitd.toml   
-          [registry."${{ env.HARBOR_URL}}"]
+          [registry."${{ secrets.HARBOR_IP }}"]
             http = false
             insecure = false
             ca=["/etc/ssl/certs/ca-certificates.crt"]
@@ -54,7 +56,6 @@ jobs:
           repository: ecmwf-projects/cads-monitor-metrics
           token: ${{ secrets.CADS_PAT }}
           path: .
-        
       
       - name: Build and push
         uses: docker/build-push-action@v3
@@ -62,7 +63,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.HARBOR_URL}}/cads-dev-env/monitor-metrics:latest
+          tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/monitor-metrics:${{ github.event.inputs.image_tag }}
           file: Dockerfile
  
 
