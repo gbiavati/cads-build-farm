@@ -1,6 +1,12 @@
 name: Build webportal image
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Image tag'
+        required: true
+        default: 'latest'
 
 # DONT FORGET TO SET THE FOLLOWING GITHUB SECRETS (not necessary if the worflow is already working)
 # EMAIL_GITHUB
