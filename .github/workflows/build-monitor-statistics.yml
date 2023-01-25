@@ -1,4 +1,4 @@
-name: Build cads-monitor-statistics image
+name: Build monitor-statistics image
 
 on:
   workflow_dispatch:
