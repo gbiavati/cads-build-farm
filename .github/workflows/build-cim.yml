@@ -9,6 +9,7 @@
 name: Build cim-ui image
 
 on:
+  push:  # Testing 
   workflow_dispatch:
     inputs:
       image_tag:
@@ -82,7 +83,7 @@ jobs:
           context: cads-cim-api
           push: true
           tags: ${{ secrets.HARBOR_IP }}/cads-backoffice-deployment/cads-cim-api:latest  # We always push the latest tag for the backend
-          file: Dockerfile
+          file: cads-cim-api/Dockerfile
         
       - name: Build UI and push
         uses: docker/build-push-action@v3
@@ -92,4 +93,4 @@ jobs:
           push: true
           pull: true  # We need to pull the backend image to build the frontend
           tags: ${{ secrets.HARBOR_IP }}/cads-backoffice-deployment/cads-cim-ui:${{ github.event.inputs.image_tag }}
-          file: Dockerfile
+          file: cads-cim-ui/Dockerfile
