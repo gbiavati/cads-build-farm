@@ -7,6 +7,10 @@ on:
         description: 'Image tag'
         required: true
         default: 'latest'
+  workflow_run:
+    workflows: 
+      - ecmwf-projects/cads-deployment/build-images.yml
+    types: [requested]
 
 jobs:
   build-docker-image:
