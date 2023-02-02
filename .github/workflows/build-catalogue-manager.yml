@@ -55,7 +55,7 @@ jobs:
           config: buildkitd.toml
  
       - name: Checkout cads-deployment repo
-        uses: actions/checkout@v3   ù
+        uses: actions/checkout@v3
         with:
           repository: ecmwf-projects/cads-deployment
           token: ${{ secrets.CADS_PAT }}
