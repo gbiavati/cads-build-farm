@@ -8,9 +8,9 @@ on:
         required: true
         default: 'latest'
   workflow_run:
-    workflows: [Build all images]
-    types: [completed]
-
+    workflows: 
+      - ecmwf-projects/cads-deployment/build-images.yml
+    types: [requested]
 
 
 jobs:
