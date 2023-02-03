@@ -1,0 +1,353 @@
+name: Build all images
+
+on: 
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Release tag'
+        required: true
+        default: 'test'
+
+  # pull_request:
+  #   types:
+  #     - closed
+  #   branches:
+  #     - 'main'
+  #     - 'releases/**'
+
+jobs:
+
+  build_broker_service:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Broker Service image
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: ecmwf-projects
+        repo: cads-build-farm
+        github_token: ${{ secrets.CADS_PAT }}
+        workflow_file_name: build-broker-service.yml
+        ref: main
+        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+
+    - name: Check Workflow status with cURL
+      env:
+        WORKFLOW: build-broker-service.yml
+      run: |
+        API_REQUEST=$( \ 
+        curl \
+        -X GET \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.CADS_PAT }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/ecmwf-projects/cads-build-farm/actions/workflows/${{ env.WORKFLOW }}/runs)
+        STATUS=$(echo "$API_REQUEST" | jq -r ".workflow_runs[-1].conclusion") 
+        echo "$STATUS"
+        if [ "$STATUS" == "success" ]; then 
+          echo "${{ env.WORKFLOW }} succeeded"
+        else
+          echo "${{ env.WORKFLOW }} failed"
+          exit 1
+        fi
+
+  build_cache_cleaner_service:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Cacholote image
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: ecmwf-projects
+        repo: cads-build-farm
+        github_token: ${{ secrets.CADS_PAT }}
+        workflow_file_name: build-cache-cleaner-service.yml
+        ref: main
+        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+
+    - name: Check Workflow status with cURL
+      env:
+        WORKFLOW: build-cache-cleaner-service.yml
+      run: |
+        API_REQUEST=$( \ 
+        curl \
+        -X GET \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.CADS_PAT }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/ecmwf-projects/cads-build-farm/actions/workflows/${{ env.WORKFLOW }}/runs)
+        STATUS=$(echo "$API_REQUEST" | jq -r ".workflow_runs[-1].conclusion") 
+        echo "$STATUS"
+        if [ "$STATUS" == "success" ]; then 
+          echo "${{ env.WORKFLOW }} succeeded"
+        else
+          echo "${{ env.WORKFLOW }} failed"
+          exit 1
+        fi
+
+  build_catalogue_api_service:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Catalogue API Service image
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: ecmwf-projects
+        repo: cads-build-farm
+        github_token: ${{ secrets.CADS_PAT }}
+        workflow_file_name: build-catalogue-api-service.yml
+        ref: main
+        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+
+    - name: Check Workflow status with cURL
+      env:
+        WORKFLOW: build-catalogue-api-service.yml
+      run: |
+        API_REQUEST=$( \ 
+        curl \
+        -X GET \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.CADS_PAT }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/ecmwf-projects/cads-build-farm/actions/workflows/${{ env.WORKFLOW }}/runs)
+        STATUS=$(echo "$API_REQUEST" | jq -r ".workflow_runs[-1].conclusion") 
+        echo "$STATUS"
+        if [ "$STATUS" == "success" ]; then 
+          echo "${{ env.WORKFLOW }} succeeded"
+        else
+          echo "${{ env.WORKFLOW }} failed"
+          exit 1
+        fi
+
+  build_catalogue_manager:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Catalogue Manager image
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: ecmwf-projects
+        repo: cads-build-farm
+        github_token: ${{ secrets.CADS_PAT }}
+        workflow_file_name: build-catalogue-manager.yml
+        ref: main
+        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+
+    - name: Check Workflow status with cURL
+      env:
+        WORKFLOW: build-catalogue-manager.yml
+      run: |
+        API_REQUEST=$( \ 
+        curl \
+        -X GET \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.CADS_PAT }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/ecmwf-projects/cads-build-farm/actions/workflows/${{ env.WORKFLOW }}/runs)
+        STATUS=$(echo "$API_REQUEST" | jq -r ".workflow_runs[-1].conclusion") 
+        echo "$STATUS"
+        if [ "$STATUS" == "success" ]; then 
+          echo "${{ env.WORKFLOW }} succeeded"
+        else
+          echo "${{ env.WORKFLOW }} failed"
+          exit 1
+        fi
+
+  build_extended_profiles:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Extended Profiles image
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: ecmwf-projects
+        repo: cads-build-farm
+        github_token: ${{ secrets.CADS_PAT }}
+        workflow_file_name: build-extended-profiles.yml
+        ref: main
+        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+
+    - name: Check Workflow status with cURL
+      env:
+        WORKFLOW: build-extended-profile.yml
+      run: |
+        API_REQUEST=$( \ 
+        curl \
+        -X GET \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.CADS_PAT }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/ecmwf-projects/cads-build-farm/actions/workflows/${{ env.WORKFLOW }}/runs)
+        STATUS=$(echo "$API_REQUEST" | jq -r ".workflow_runs[-1].conclusion") 
+        echo "$STATUS"
+        if [ "$STATUS" == "success" ]; then 
+          echo "${{ env.WORKFLOW }} succeeded"
+        else
+          echo "${{ env.WORKFLOW }} failed"
+          exit 1
+        fi
+
+  build_processing_api_service:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Processing API Service image
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: ecmwf-projects
+        repo: cads-build-farm
+        github_token: ${{ secrets.CADS_PAT }}
+        workflow_file_name: build-processing-api-service.yml
+        ref: main
+        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+  
+    - name: Check Workflow status with cURL
+      env:
+        WORKFLOW: build-processing-api-service.yml
+      run: |
+        API_REQUEST=$( \ 
+        curl \
+        -X GET \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.CADS_PAT }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/ecmwf-projects/cads-build-farm/actions/workflows/${{ env.WORKFLOW }}/runs)
+        STATUS=$(echo "$API_REQUEST" | jq -r ".workflow_runs[-1].conclusion") 
+        echo "$STATUS"
+        if [ "$STATUS" == "success" ]; then 
+          echo "${{ env.WORKFLOW }} succeeded"
+        else
+          echo "${{ env.WORKFLOW }} failed"
+          exit 1
+        fi
+
+  build_proxy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build proxy image
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: ecmwf-projects
+        repo: cads-build-farm
+        github_token: ${{ secrets.CADS_PAT }}
+        workflow_file_name: build-proxy.yml
+        ref: main
+        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+
+    - name: Check Workflow status with cURL
+      env:
+        WORKFLOW: build-proxy.yml
+      run: |
+        API_REQUEST=$( \ 
+        curl \
+        -X GET \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.CADS_PAT }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/ecmwf-projects/cads-build-farm/actions/workflows/${{ env.WORKFLOW }}/runs)
+        STATUS=$(echo "$API_REQUEST" | jq -r ".workflow_runs[-1].conclusion") 
+        echo "$STATUS"
+        if [ "$STATUS" == "success" ]; then 
+          echo "${{ env.WORKFLOW }} succeeded"
+        else
+          echo "${{ env.WORKFLOW }} failed"
+          exit 1
+        fi
+
+  build_webportal:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Webportal image
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: ecmwf-projects
+        repo: cads-build-farm
+        github_token: ${{ secrets.CADS_PAT }}
+        workflow_file_name: build-webportal.yml
+        ref: main
+        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+
+    - name: Check Workflow status with cURL
+      env:
+        WORKFLOW: build-webportal.yml
+      run: |
+        API_REQUEST=$( \ 
+        curl \
+        -X GET \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.CADS_PAT }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/ecmwf-projects/cads-build-farm/actions/workflows/${{ env.WORKFLOW }}/runs)
+        STATUS=$(echo "$API_REQUEST" | jq -r ".workflow_runs[-1].conclusion") 
+        echo "$STATUS"
+        if [ "$STATUS" == "success" ]; then 
+          echo "${{ env.WORKFLOW }} succeeded"
+        else
+          echo "${{ env.WORKFLOW }} failed"
+          exit 1
+        fi
+
+  build_worker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Worker image
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: ecmwf-projects
+        repo: cads-build-farm
+        github_token: ${{ secrets.CADS_PAT }}
+        workflow_file_name: build-worker.yml
+        ref: main
+        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+
+    - name: Check Workflow status with cURL
+      env:
+        WORKFLOW: build-worker.yml
+      run: |
+        API_REQUEST=$( \ 
+        curl \
+        -X GET \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.CADS_PAT }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/ecmwf-projects/cads-build-farm/actions/workflows/${{ env.WORKFLOW }}/runs)
+        STATUS=$(echo "$API_REQUEST" | jq -r ".workflow_runs[-1].conclusion") 
+        echo "$STATUS"
+        if [ "$STATUS" == "success" ]; then 
+          echo "${{ env.WORKFLOW }} succeeded"
+        else
+          echo "${{ env.WORKFLOW }} failed"
+          exit 1
+        fi
+
+  # if_merged:
+  #   if: github.event.pull_request.merged == true
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - run: |
+  #       echo The PR was merged
+
+  # build:
+  #   needs: if_merged
+  #   runs-on: ubuntu-latest
