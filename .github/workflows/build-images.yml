@@ -105,22 +105,6 @@ jobs:
         trigger_workflow: true
         wait_workflow: true
 
-  build_proxy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Build proxy image
-      uses: convictional/trigger-workflow-and-wait@v1.6.5
-      with:
-        owner: ecmwf-projects
-        repo: cads-build-farm
-        github_token: ${{ secrets.CADS_PAT }}
-        workflow_file_name: build-proxy.yml
-        ref: main
-        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
-        propagate_failure: false
-        trigger_workflow: true
-        wait_workflow: true
-
   build_webportal:
     runs-on: ubuntu-latest
     steps:
