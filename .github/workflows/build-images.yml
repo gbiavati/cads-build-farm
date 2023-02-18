@@ -73,6 +73,22 @@ jobs:
         trigger_workflow: true
         wait_workflow: true
 
+  build_csw_api:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build PyCSW Dynamic image
+      uses: convictional/trigger-workflow-and-wait@v1.6.5
+      with:
+        owner: ecmwf-projects
+        repo: cads-build-farm
+        github_token: ${{ secrets.CADS_PAT }}
+        workflow_file_name: build-csw-api.yml
+        ref: main
+        client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
+        propagate_failure: false
+        trigger_workflow: true
+        wait_workflow: true
+
   build_extended_profiles:
     runs-on: ubuntu-latest
     steps:
