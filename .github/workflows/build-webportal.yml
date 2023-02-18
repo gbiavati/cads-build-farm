@@ -65,7 +65,7 @@ jobs:
         with:
           context: ./cads-webportal
           push: true
-          tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/webportal:latest
+          tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/webportal:${{ github.event.inputs.image_tag }}
           file: ./cads-webportal/docker/remote.Dockerfile
           build-args: |
             CADS_PORTAL=cds
