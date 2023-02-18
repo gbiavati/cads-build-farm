@@ -76,7 +76,7 @@ jobs:
   build_csw_api:
     runs-on: ubuntu-latest
     steps:
-    - name: Build Catalogue Manager image
+    - name: Build PyCSW Dynamic image
       uses: convictional/trigger-workflow-and-wait@v1.6.5
       with:
         owner: ecmwf-projects
