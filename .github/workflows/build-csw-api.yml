@@ -1,4 +1,3 @@
-
 name: Build csw-api image
 
 on:
@@ -9,7 +8,7 @@ on:
         required: true
         default: 'latest'
   workflow_run:
-    workflows: 
+    workflows:
       - ecmwf-projects/cads-build-farm/build-images.yml
     types: [requested]
 
@@ -62,11 +61,8 @@ jobs:
           path: ./pycsw-dynamic
       - name: Build and push
         uses: docker/build-push-action@v3
-
         with:
           context: ./pycsw-dynamic
           push: true
           tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/csw-api:${{ github.event.inputs.image_tag }}
           file: ./pycsw-dynamic/Dockerfile
-          build-args: |
-            GITHUB_TOKEN=${{ secrets.CADS_PAT }}

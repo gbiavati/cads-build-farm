@@ -22,7 +22,7 @@ jobs:
       - name: Setup harbor ca certificate from secret
         run: |
           ls /etc/docker
-          sudo mkdir -p /etc/docker/certs.d/"${{ secrets.HARBOR_IP }}" 
+          sudo mkdir -p /etc/docker/certs.d/"${{ secrets.HARBOR_IP }}"
           echo "${{ secrets.HARBOR_CERT }}" | sudo tee /etc/docker/certs.d/"${{ secrets.HARBOR_IP }}"/ca.crt >/dev/null
       - name: Copy ca cert
         run: |
@@ -36,9 +36,10 @@ jobs:
       - name: Setup docker context for buildx
         id: buildx-context
         run: docker context create builders || docker context use builders
+
       - name: Create BuildKit Configuration
         run: |
-          cat <<EOF > buildkitd.toml   
+          cat <<EOF > buildkitd.toml
           [registry."${{ secrets.HARBOR_IP }}"]
             http = false
             insecure = false
