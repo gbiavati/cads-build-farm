@@ -34,11 +34,12 @@ At the end of a Work Package cicle we want to release the version `2023.02.0` of
     If somehow anything is broken or some of the tests have <span style="color:red">**FAILED**</span> status you can safely check it, fix and commit changes on the related repo
 4. Now that all the test have <span style="color:green">**PASSED**</span> status and everything works as expected, we can manually trigger the GitHub Action `Build all images` on this repo from the Action panel. I specify that the tag will be `2023-02.0`
 
-    ACTION_PANEL_SCREENSHOT
+    ![Trigger-Build-Images](https://user-images.githubusercontent.com/59499702/220286056-b6f344d3-9495-4210-a101-3a6f6aa5a136.png)
 
     Wait until all the workflows are finished
 
-    WORKFLOW_STATUS_SCREENSHOT
+    ![wait-Build-images](https://user-images.githubusercontent.com/59499702/220286167-ac397c3e-6822-4516-8840-612eb474a4a3.png)
+
 
 5. Wait until all the workflows are finished. Now from `cads-deployment` repo edit this file
 
