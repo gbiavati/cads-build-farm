@@ -67,7 +67,7 @@ jobs:
 
       - name: Setup bitbucket netrc
         run: |
-          echo "${{ secrets.BITBUCKET_NETRC }}" > netrc
+          echo "${{ secrets.BITBUCKET_NETRC }}" > docker/netrc
 
       - name: Build and push
         uses: docker/build-push-action@v3
