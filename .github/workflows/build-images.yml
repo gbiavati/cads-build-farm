@@ -1,6 +1,6 @@
 name: Build all images
 
-on: 
+on:
   workflow_dispatch:
     inputs:
       image_tag:
