@@ -1,4 +1,4 @@
-name: Build broker-service image
+name: Build broker image
 
 on:
   workflow_dispatch:
@@ -58,6 +58,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: ecmwf-projects/cads-deployment
+        ref: update-dockerfile-name
         token: ${{ secrets.CADS_PAT }}
         path: .
 
@@ -88,4 +89,4 @@ jobs:
         context: docker
         push: true
         tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/broker:${{ github.event.inputs.image_tag }}
-        file: docker/broker-service/Dockerfile
+        file: docker/broker/Dockerfile
