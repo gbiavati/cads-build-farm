@@ -69,7 +69,7 @@ At the end of a Work Package cycle we want to release the version `2023.02.0` of
         newName: my-private-registry/broker
         newTag: '2023-02.0'
         - name: catalogue-api
-        newName: my-private-registry/catalogue-api-service
+        newName: my-private-registry/catalogue-api
         newTag: '2023-02.0'
         - name: cads-catalogue-manager
         [...]

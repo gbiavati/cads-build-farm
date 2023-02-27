@@ -1,4 +1,4 @@
-name: Build catalogue-api-service image
+name: Build catalogue-api image
 
 on:
   workflow_dispatch:
@@ -57,6 +57,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: ecmwf-projects/cads-deployment
+        ref: update-image-catalogue-api
         token: ${{ secrets.CADS_PAT }}
         path: .
 
@@ -79,5 +80,5 @@ jobs:
       with:
         context: docker
         push: true
-        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/catalogue-api-service:${{ github.event.inputs.image_tag }}
-        file: docker/catalogue-api-service/Dockerfile
+        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/catalogue-api:${{ github.event.inputs.image_tag }}
+        file: docker/catalogue-api/Dockerfile
