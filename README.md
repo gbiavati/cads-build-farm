@@ -18,7 +18,7 @@ As described [here](https://github.com/ecmwf-projects/cads-deployment) FluxCD au
 
 #### Integration tests
 
-To verify the proper functioning of the code deployed on a specific namespace the user(developer) could run manually the integration tests from the [cads-api-client repo](https://github.com/ecmwf-projects/cads-api-client). The integration tests check .all the services and api exposed.
+To verify the proper functioning of the code deployed on a specific namespace the user(developer) could run manually the integration tests from the [cads-api-client repo](https://github.com/ecmwf-projects/cads-api-client). The integration tests check all the services and api exposed.
 
 #### Build and Push
 
