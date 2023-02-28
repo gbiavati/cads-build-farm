@@ -1,4 +1,4 @@
-name: Build processing-api-service image
+name: Build retrieve-api image
 
 on:
   workflow_dispatch:
@@ -100,5 +100,5 @@ jobs:
       with:
         context: docker
         push: true
-        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/processing-api-service:${{ github.event.inputs.image_tag }}
-        file: docker/processing-api-service/Dockerfile
+        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/retrieve-api:${{ github.event.inputs.image_tag }}
+        file: docker/retrieve-api/Dockerfile
