@@ -81,5 +81,5 @@ jobs:
       with:
         context: docker
         push: true
-        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/cache-cleaner-service:${{ github.event.inputs.image_tag }}
+        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/cache-cleaner:${{ github.event.inputs.image_tag }}
         file: docker/cache-cleaner/Dockerfile
