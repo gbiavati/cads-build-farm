@@ -9,23 +9,23 @@ on:
         default: 'test'
 jobs:
 
-  build_broker_service:
+  build_broker:
     runs-on: ubuntu-latest
     steps:
-    - name: Build Broker Service image
+    - name: Build Broker image
       uses: convictional/trigger-workflow-and-wait@v1.6.5
       with:
         owner: ecmwf-projects
         repo: cads-build-farm
         github_token: ${{ secrets.CADS_PAT }}
-        workflow_file_name: build-broker-service.yml
+        workflow_file_name: build-broker.yml
         ref: main
         client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
         propagate_failure: false
         trigger_workflow: true
         wait_workflow: true
 
-  build_cache_cleaner_service:
+  build_cache_cleaner:
     runs-on: ubuntu-latest
     steps:
     - name: Build Cacholote image
@@ -34,14 +34,14 @@ jobs:
         owner: ecmwf-projects
         repo: cads-build-farm
         github_token: ${{ secrets.CADS_PAT }}
-        workflow_file_name: build-cache-cleaner-service.yml
+        workflow_file_name: build-cache-cleaner.yml
         ref: main
         client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
         propagate_failure: false
         trigger_workflow: true
         wait_workflow: true
 
-  build_catalogue_api_service:
+  build_catalogue_api:
     runs-on: ubuntu-latest
     steps:
     - name: Build Catalogue API Service image
@@ -50,7 +50,7 @@ jobs:
         owner: ecmwf-projects
         repo: cads-build-farm
         github_token: ${{ secrets.CADS_PAT }}
-        workflow_file_name: build-catalogue-api-service.yml
+        workflow_file_name: build-catalogue-api.yml
         ref: main
         client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
         propagate_failure: false
@@ -89,32 +89,32 @@ jobs:
         trigger_workflow: true
         wait_workflow: true
 
-  build_extended_profiles:
+  build_profiles_api:
     runs-on: ubuntu-latest
     steps:
-    - name: Build Extended Profiles image
+    - name: Build Profiles API image
       uses: convictional/trigger-workflow-and-wait@v1.6.5
       with:
         owner: ecmwf-projects
         repo: cads-build-farm
         github_token: ${{ secrets.CADS_PAT }}
-        workflow_file_name: build-extended-profiles.yml
+        workflow_file_name: build-profiles-api.yml
         ref: main
         client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
         propagate_failure: false
         trigger_workflow: true
         wait_workflow: true
 
-  build_processing_api_service:
+  build_retrieve_api:
     runs-on: ubuntu-latest
     steps:
-    - name: Build Processing API Service image
+    - name: Build Retrieve API image
       uses: convictional/trigger-workflow-and-wait@v1.6.5
       with:
         owner: ecmwf-projects
         repo: cads-build-farm
         github_token: ${{ secrets.CADS_PAT }}
-        workflow_file_name: build-processing-api-service.yml
+        workflow_file_name: build-retrieve-api.yml
         ref: main
         client_payload: '{ "image_tag": "${{ github.event.inputs.image_tag }}" }'
         propagate_failure: false
