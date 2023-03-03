@@ -72,12 +72,12 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cacholote
 
-    - name: Checkout cads-retrieve-tools repo
+    - name: Checkout cads-adaptors repo
       uses: actions/checkout@v3
       with:
-        repository: ecmwf-projects/cads-retrieve-tools
+        repository: ecmwf-projects/cads-adaptors
         token: ${{ secrets.CADS_PAT }}
-        path: ./docker/cads-retrieve-tools
+        path: ./docker/cads-adaptors
 
     - name: Checkout cads-worker repo
       uses: actions/checkout@v3
