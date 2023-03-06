@@ -88,6 +88,13 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-broker
 
+    - name: Checkout cads-adaptors repo
+      uses: actions/checkout@v3
+      with:
+        repository: ecmwf-projects/cads-adaptors
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-adaptors
+
     - name: Checkout cads-processing-api-service repo
       uses: actions/checkout@v3
       with:
