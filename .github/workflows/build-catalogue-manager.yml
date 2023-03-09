@@ -89,6 +89,13 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-messages
 
+    - name: Clone cads-licences repo
+      uses: actions/checkout@v2
+      with:
+        repository: ecmwf-projects/cads-licences
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-licences
+
     - name: Build and push
       uses: docker/build-push-action@v3
       with:
