@@ -79,6 +79,13 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-adaptors
 
+    - name: Checkout cads-obs-catalogue-manager repo
+      uses: actions/checkout@v3
+      with:
+        repository: ecmwf-projects/cads-obs-catalogue-manager
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-obs-catalogue-manager
+
     - name: Checkout cads-worker repo
       uses: actions/checkout@v3
       with:
