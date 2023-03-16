@@ -85,6 +85,7 @@ jobs:
         repository: ecmwf-projects/cads-obs-catalogue-manager
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-obs-catalogue-manager
+        submodules: recursive
 
     - name: Checkout cads-worker repo
       uses: actions/checkout@v3
