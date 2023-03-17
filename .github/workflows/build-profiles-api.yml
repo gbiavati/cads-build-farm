@@ -61,6 +61,13 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: .
 
+    - name: Clone cads-licences repo
+      uses: actions/checkout@v2
+      with:
+        repository: ecmwf-projects/cads-licences
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-licences
+
     - name: Checkout cads-extended-profiles repo
       uses: actions/checkout@v3
       with:
