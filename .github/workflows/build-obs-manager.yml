@@ -15,11 +15,8 @@ on:
         description: 'Image tag'
         required: true
         default: 'latest'
-  pull_request:
-    types: [edited]
 
 jobs:
-
   build-docker-image:
     runs-on: ubuntu-latest
     steps:
@@ -66,6 +63,8 @@ jobs:
         repository: ecmwf-projects/cads-obs-catalogue-manager
         token: ${{ secrets.CADS_PAT }}
         path: cads-obs-catalogue-manager
+        with:
+          submodules: recursive
 
     - name: Build and push
       uses: docker/build-push-action@v3
@@ -73,5 +72,5 @@ jobs:
       with:
         context: cads-obs-catalogue-manager
         push: true
-        tags: ${{ secrets.HARBOR_IP }}/cads-obs/cads-obs-catalogue-manager:latest    # We always push the latest tag for the backend
+        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/cads-obs-catalogue-manager:latest
         file: cads-obs-catalogue-manager/docker/Dockerfile
