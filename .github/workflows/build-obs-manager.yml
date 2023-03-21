@@ -65,8 +65,7 @@ jobs:
         repository: ecmwf-projects/cads-obs-catalogue-manager
         token: ${{ secrets.CADS_PAT }}
         path: cads-obs-catalogue-manager
-        with:
-          submodules: recursive
+        submodules: recursive
 
     - name: Build and push
       uses: docker/build-push-action@v3
