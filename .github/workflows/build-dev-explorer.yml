@@ -1,4 +1,4 @@
-name: Build catalogue-api image
+name: Build dev-explorer image
 
 on:
   workflow_dispatch:
