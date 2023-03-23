@@ -104,13 +104,6 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-licences
 
-    - name: Checkout cacholote repo
-      uses: actions/checkout@v3
-      with:
-        repository: ecmwf-projects/cacholote
-        token: ${{ secrets.CADS_PAT }}
-        path: ./docker/cacholote
-
     - name: Build and push
       uses: docker/build-push-action@v3
       with:
