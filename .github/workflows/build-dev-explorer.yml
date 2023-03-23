@@ -74,6 +74,36 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-load-tests
 
+    - name: Checkout cads-catalogue repo
+      uses: actions/checkout@v3
+      with:
+        repository: ecmwf-projects/cads-catalogue
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-catalogue
+
+    - name: Clone cads-forms-json repo
+      uses: actions/checkout@v2
+      with:
+        repository: ecmwf-projects/cads-forms-json
+        ref: cds2-dev
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-forms-json
+
+    - name: Clone cads-messages repo
+      uses: actions/checkout@v2
+      with:
+        repository: ecmwf-projects/cads-messages
+        ref: cds
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-messages
+
+    - name: Clone cads-licences repo
+      uses: actions/checkout@v2
+      with:
+        repository: ecmwf-projects/cads-licences
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-licences
+
     - name: Build and push
       uses: docker/build-push-action@v3
       with:
