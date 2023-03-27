@@ -64,5 +64,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/cads-broker-exporter:${{ github.event.inputs.image_tag }}
+        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/cads-broker-exporter:latest
         file: Dockerfile
