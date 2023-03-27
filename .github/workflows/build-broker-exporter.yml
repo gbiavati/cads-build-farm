@@ -1,7 +1,6 @@
 name: Build broker-exporter image
 
 on:
-  push:  # For testing
   workflow_dispatch:
     inputs:
       image_tag:
@@ -64,5 +63,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/cads-broker-exporter:latest
+        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/cads-broker-exporter:${{ github.event.inputs.image_tag }}
         file: Dockerfile
