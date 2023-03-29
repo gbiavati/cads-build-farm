@@ -71,7 +71,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ecmwf-projects/cads-forms-json
-        ref: cds2-dev
+        ref: cds2-test
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-forms-json
 
@@ -79,7 +79,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ecmwf-projects/cads-messages
-        ref: cds
+        ref: cds2-test
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-messages
 
@@ -87,6 +87,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ecmwf-projects/cads-licences
+        ref: cds2-test
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-licences
 
