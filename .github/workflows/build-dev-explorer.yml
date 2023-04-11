@@ -81,6 +81,14 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-catalogue
 
+    - name: Checkout cacholote repo
+      uses: actions/checkout@v3
+      with:
+        repository: ecmwf-projects/cacholote
+        ref: cacholote-on-dev-explorer
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cacholote
+
     - name: Clone cads-forms-json repo
       uses: actions/checkout@v2
       with:
