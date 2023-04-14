@@ -74,7 +74,7 @@ jobs:
       with:
         repository: ecmwf-projects/cads-common
         token: ${{ secrets.CADS_PAT }}
-        path: ./docker/cads-licences
+        path: ./docker/cads-common
 
     - name: Checkout cads-extended-profiles repo
       uses: actions/checkout@v3

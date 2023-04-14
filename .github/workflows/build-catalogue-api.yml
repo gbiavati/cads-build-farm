@@ -97,7 +97,7 @@ jobs:
       with:
         repository: ecmwf-projects/cads-common
         token: ${{ secrets.CADS_PAT }}
-        path: ./docker/cads-licences
+        path: ./docker/cads-common
 
     - name: Checkout cads-catalogue-api-service repo
       uses: actions/checkout@v3
