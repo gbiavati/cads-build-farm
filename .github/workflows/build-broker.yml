@@ -68,6 +68,13 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cacholote
 
+    - name: Clone cads-common repo
+      uses: actions/checkout@v2
+      with:
+        repository: ecmwf-projects/cads-common
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-common
+
     - name: Checkout cads-broker repo
       uses: actions/checkout@v3
       with:
