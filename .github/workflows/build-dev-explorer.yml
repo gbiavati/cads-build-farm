@@ -57,6 +57,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: ecmwf-projects/cads-deployment
+        ref: extended-profiles-on-dev-explorer
         token: ${{ secrets.CADS_PAT }}
         path: .
 
@@ -87,6 +88,13 @@ jobs:
         repository: ecmwf-projects/cacholote
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cacholote
+
+    - name: Checkout cads-extended-profiles repo
+      uses: actions/checkout@v3
+      with:
+        repository: ecmwf-projects/cads-extended-profiles
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-extended-profiles
 
     - name: Checkout cads-worker repo
       uses: actions/checkout@v3
