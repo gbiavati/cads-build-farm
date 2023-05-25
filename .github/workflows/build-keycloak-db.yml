@@ -1,4 +1,4 @@
-name: Build broker image
+name: Build keycloak-db image
 
 on:
   workflow_dispatch:
