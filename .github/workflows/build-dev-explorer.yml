@@ -67,6 +67,13 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-api-client
 
+    - name: Checkout cads-deployment repo
+      uses: actions/checkout@v3
+      with:
+        repository: ecmwf-projects/cads-deployment
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-deployment
+
     - name: Clone cads-load-tests repo
       uses: actions/checkout@v2
       with:
