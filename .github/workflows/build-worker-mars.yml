@@ -1,4 +1,4 @@
-name: Build worker-mars image
+name: Build dask-mars image
 
 on:
   workflow_dispatch:
@@ -78,7 +78,7 @@ jobs:
 
     - name: Copy files
       run: |
-        cp docker/worker-mars/mars docker/mars
+        cp docker/dask-mars/mars docker/mars
 
     - name: Build and push
       uses: docker/build-push-action@v3
@@ -86,5 +86,5 @@ jobs:
       with:
         context: docker
         push: true
-        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/worker-mars:${{ github.event.inputs.image_tag }}
-        file: docker/worker-mars/Dockerfile
+        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/dask-mars:${{ github.event.inputs.image_tag }}
+        file: docker/dask-mars/Dockerfile
