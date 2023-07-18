@@ -1,0 +1,39 @@
+name: Tag images on Harbor
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_branch:
+        description: 'Deployment branch'
+        required: true
+        default: 'main'
+      image_tag:
+        description: 'Image tag'
+        required: true
+        default: 'latest'
+      new_tag:
+        description: 'New tag'
+        required: true
+        default: 'test'
+
+jobs:
+  tag-harbor-images:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout cads-deployment repo
+      uses: actions/checkout@v3
+      with:
+        repository: ecmwf-projects/cads-deployment
+        token: ${{ secrets.CADS_PAT }}
+        ref: ${{ github.event.inputs.deployment_branch }}
+        path: .
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+    - name: Install Dependencies
+      run: pip install requests
+    - name: Run Python Script
+      run: python release.py ${{ github.event.inputs.image_tag }} ${{ github.event.inputs.new_tag }} ${{ secrets.HARBOR_USER }} ${{ secrets.HARBOR_TOKEN }}
+    
