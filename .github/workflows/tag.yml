@@ -38,6 +38,4 @@ jobs:
       run: python release.py --image-tag ${{ github.event.inputs.image_tag }} ${{ github.event.inputs.new_tag }}
       env:
         HARBOR_USER: ${{ secrets.HARBOR_USER }}
-        HARBOR_TOKEN: ${{ secrets.HARBOR_TOKEN }}
-        HARBOR_IP: ${{ secrets.HARBOR_IP }}
-    
+        HARBOR_TOKEN: ${{ secrets.HARBOR_TOKEN }}    
