@@ -75,6 +75,14 @@ jobs:
         token: ${{ secrets.CADS_PAT }}
         path: ./docker/cads-forms-json
 
+    - name: Clone cads-forms-cim-json repo
+      uses: actions/checkout@v2
+      with:
+        repository: ecmwf-projects/cads-forms-cim-json
+        ref: cds2-test
+        token: ${{ secrets.CADS_PAT }}
+        path: ./docker/cads-forms-cim-json
+
     - name: Clone cads-messages repo
       uses: actions/checkout@v2
       with:
