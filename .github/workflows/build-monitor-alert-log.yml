@@ -1,6 +1,7 @@
 name: Build cads-monitor-alert-log image
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       image_tag:
