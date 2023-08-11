@@ -1,4 +1,4 @@
-name: Build cads-monitor-alert-log image
+name: Build monitor-alert-log image
 
 on:
   workflow_dispatch:
