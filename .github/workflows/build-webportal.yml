@@ -7,6 +7,10 @@ on:
         description: 'Image tag'
         required: true
         default: 'latest'
+      gh_branch:
+        description: 'Branch'
+        required: true
+        default: 'main'
   workflow_run:
     workflows:
     - ecmwf-projects/cads-build-farm/build-images.yml
@@ -59,6 +63,7 @@ jobs:
         repository: ecmwf-projects/cads-webportal
         token: ${{ secrets.CADS_PAT }}
         path: ./cads-webportal
+        ref: ${{ github.event.inputs.gh_branch }}
     - name: Build and push
       uses: docker/build-push-action@v3
 
