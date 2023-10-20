@@ -70,7 +70,7 @@ jobs:
       with:
         context: ./cads-webportal
         push: true
-        tags: ${{ secrets.HARBOR_IP }}/foo42/webportal:${{ github.event.inputs.image_tag }}
+        tags: ${{ secrets.HARBOR_IP }}/cads/foo42/webportal:${{ github.event.inputs.image_tag }}
         file: ./cads-webportal/docker/remote.Dockerfile
         build-args: |
           CADS_PORTAL=cds
