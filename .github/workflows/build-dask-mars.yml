@@ -86,5 +86,5 @@ jobs:
       with:
         context: docker
         push: true
-        tags: ${{ secrets.HARBOR_IP }}/cads-dev-env/dask-mars:${{ github.event.inputs.image_tag }}
+        tags: ${{ secrets.HARBOR_IP }}/cads/foo42/dask-mars:${{ github.event.inputs.image_tag }}
         file: docker/dask-mars/Dockerfile
