@@ -41,7 +41,7 @@ jobs:
         repository: gbiavati/pycube
         ref: develop
         token: ${{ secrets.CADS_PAT }}
-        path: ./cads-forms-json
+        path: ./pycube
         
     - name: Install dependencies
       run: |
