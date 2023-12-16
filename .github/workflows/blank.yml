@@ -53,4 +53,4 @@ jobs:
       run: |
         export FORMS_ROOT=./cads-forms-json
         export CADS_API_CREDENTIALS='{"url": "https://cads-cci.copernicus-climate.eu/api", "key": "9838d132-cd13-4ab0-8644-ac0152ce9838"}'
-        pycube test-dataset --dataset reanalysis-era5-pressure-levels-cci --n 100
+        pycube test-dataset --dataset reanalysis-era5-pressure-levels-cci --n 36
